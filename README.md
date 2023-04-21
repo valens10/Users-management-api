@@ -40,7 +40,7 @@ This is a user management application whic is built using the Django web framewo
 `http://localhost:8000/api/v1/`
 
 
-- To authenticate and access protected endpoints, you need to obtain a JWT token by sending a POST request to the auth/token/ endpoint with your username and password:
+- To authenticate and access protected endpoints, you need to obtain token by sending a POST request to the auth/token/ endpoint with your username and password:
 
 ```
 POST http://localhost:8000/api/v1/auth/token/
