@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .custom_manager import CustomUserManager
 from userManagementApi.utils import generate_digits_code
+from django_countries.fields import CountryField
+
 import uuid
 # Create your models here.
 
@@ -15,12 +17,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-
+    first_name = models.CharField(max_length=200, blank=True, null=True)
+    last_name = models.CharField(max_length=200, blank=True, null=True)
     phone_number = models.CharField(max_length=20,unique=True, null=False, blank=False)
     username = models.CharField(null=True, blank=True, max_length=30, editable=False)
     email = models.EmailField(unique=True,null=False, blank=False)
     is_email_verified = models.BooleanField(default=False)
-    nationality = models.CharField(max_length=100,null=True, blank=True)
+    nationality = CountryField(null=True, blank=True)
     birthdate = models.DateField(null=True, blank=True)
 
     marital_statuses = [

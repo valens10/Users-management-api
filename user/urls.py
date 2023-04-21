@@ -1,10 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import UserListViewset, UserDetailViewset, AuthenticationViewset, VerificationsViewset
+from .views import UserListViewset, UserDetailViewset
 
 routes = DefaultRouter(trailing_slash=False)
-routes.register('auth', AuthenticationViewset, basename='auth')
-routes.register('verifications', VerificationsViewset, basename='verifications')
 
 urlpatterns = [
     path("", include(routes.urls)),

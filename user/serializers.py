@@ -1,6 +1,6 @@
 from django.utils import timezone
 from rest_framework.serializers import ModelSerializer
-from .models import User, Verification
+from .models import CustomUser, Verification
 from django.contrib.auth.models import Group
 
 
@@ -12,24 +12,8 @@ class GroupMiniSerializer(ModelSerializer):
 
 class UserMiniSerializer(ModelSerializer):
     class Meta:
-        model = User
-        fields = [
-            "id",
-            "first_name",
-            "last_name",
-            "phone_number",
-            "email",
-            "is_email_verified",
-            "nationality",
-            "is_active",
-            "is_staff",
-            "birthdate",
-            "marital_status",
-            "gender",
-            "verification_status",
-            "profile_photo"
-        ]
-        read_only_fields = ['is_active', 'is_staff', 'verification_status', 'is_email_verified']
+        model = CustomUser
+        fields = "__all__"
 
     def to_representation(self, instance):
         serialized_data = super(UserMiniSerializer, self).to_representation(instance)
