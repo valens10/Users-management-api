@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -141,9 +141,11 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
 #Sendgrid Integration
-SENDGRID_API_KEY = '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'
-SENDGRID_DEFAULT_SENDER = 'nsengvalens4@gmail.com'
+SENDGRID_API_KEY = config("SENDGRID_API_KEY")
+SENDER_EMAIL = config("SENDER_EMAIL")
 
+#Base Url
+WEB_URL = 'http://localhost:4200'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

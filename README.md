@@ -30,6 +30,18 @@ This is a user management application whic is built using the Django web framewo
 4. $ python manage.py createsuperuser
 `$ python manage.py createsuperuser`
 
+4. $ Setup environment variables
+
+    ```
+    create .env file and the above variables
+
+    {
+        'SENDGRID_API_KEY'='SENDGRID_API_KEY'
+        'SENDER_EMAIL'='SENDER_EMAIL'
+    }
+
+    ```
+
 5. Run the development server:
 `$ python manage.py runserver`
 
@@ -37,21 +49,22 @@ This is a user management application whic is built using the Django web framewo
 ## Usage
 
 - You can access the API endpoints using the following base URL:
-`http://localhost:8000/api/v1/`
+`http://localhost:8000/`
 
 
-- To authenticate and access protected endpoints, you need to obtain token by sending a POST request to the auth/token/ endpoint with your username and password:
+- To authenticate and access protected endpoints, you need to obtain token by sending a POST request to the /authenticate endpoint with your username and password:
 
 ```
-POST http://localhost:8000/api/v1/auth/token/
+POST http://localhost:8000/api/v1/authenticate
 
 {
     "username": "your-username",
+    "code": "your-code"
     "password": "your-password"
 }
 
 ```
-- The API documentation is available at [http://localhost:8000/api/v1/docs/](here).
+- The API documentation is available at [http://localhost:8000/api-docs](here).
 
 
 ## License

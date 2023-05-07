@@ -16,6 +16,7 @@ from .models import CustomUser, Verification
 from .serializers import UserMiniSerializer
 from .utils import is_username_email
 from notification.tasks.tasks_email import send_email_task
+from userManagementApi import settings
 
 
 class UserListViewset(GenericAPIView, ListModelMixin):
@@ -637,11 +638,6 @@ class AuthenticationViewset(ViewSet):
                 {"detail": "The account with the email address is not active. Activate your account to continue"},
                 status=400)
 
-        if not user.is_email_verified:
-            return Response(
-                {"detail": "The email address is not verified. Use other login methods and verify your account first"},
-                status=400)
-
         verification = Verification(user=user, is_valid=True, is_used=False)
         verification.save()
 
@@ -650,9 +646,7 @@ class AuthenticationViewset(ViewSet):
         
         """
 
-        link = f"http://localhost:4200/auth/login-with-link/{verification.id}"
-        print('link----> ',link)
-
+        link = f"{settings.WEB_URL + '/auth/login-with-link'}/{verification.id}"
         subject = "User Management System Authentication"
         message = f"<p>Please click this link to login: <a href=\"{link}\">Here</a></p>"
         emails = [email]
