@@ -234,6 +234,7 @@ class AuthenticationViewset(ViewSet):
         Request an OTP code for various uses
         """
         username = request.data.get("username")
+        is_register = request.data.get("is_register")
 
         filter_params = {}
 
@@ -248,8 +249,11 @@ class AuthenticationViewset(ViewSet):
         user = CustomUser.objects.filter(**filter_params).first()
 
         if not user:
-            user = CustomUser(**filter_params)
-            user.set_unusable_password()
+            if is_register: # if is making a registration create a user with email and set_unusable_password
+                user = CustomUser(**filter_params)
+                user.set_unusable_password()
+            else:
+                return Response({"detail": "Account not found, please sign up"}, status=400) 
 
             try:
                 user.save()
@@ -631,7 +635,7 @@ class AuthenticationViewset(ViewSet):
         user = CustomUser.objects.filter(email=email).first()
 
         if not user:
-            return Response({"detail": "Account with the email is not found"}, status=400)
+            return Response({"detail": "Account with this email is not found"}, status=400)
 
         if not user.is_active:
             return Response(

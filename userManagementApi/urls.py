@@ -25,9 +25,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="User Account Management System API",
+      title="User Management System API",
       default_version='v1',
-      description="User Account Management System API",
+      description="User Management System API",
       contact=openapi.Contact(email="nsengvalens4@gmail.com")
    ),
    public=True,
