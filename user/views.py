@@ -599,9 +599,9 @@ class AuthenticationViewset(ViewSet):
         request_body=openapi.Schema(
             type=openapi.TYPE_OBJECT,
             properties={
-                'email': openapi.Schema(type=openapi.TYPE_STRING, description='Email'),
+                'username': openapi.Schema(type=openapi.TYPE_STRING, description='Email'),
             },
-            required=['email']
+            required=['username']
         ),
         responses={
             status.HTTP_200_OK: openapi.Response(
